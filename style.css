@@ -1,0 +1,38 @@
+#calc-body{
+    width: 500px;
+    height: 800px;
+    display: flex;
+    background-color: beige;
+    flex-direction: column;
+
+}
+
+#number-row{
+    flex-grow: 6;
+}
+body{
+    background-color: white;
+}
+
+.row{
+    display: flex;
+    flex: auto;
+    flex-grow: 1;
+    background-color: aqua;
+    margin: 3px;
+    
+}
+
+.button {
+    background-color: grey;
+    margin: 2px;
+    flex: auto;
+    width: 50%;
+    padding-bottom: 50%;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.button.operator{
+    background-color: palevioletred;
+}
