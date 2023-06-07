@@ -1,3 +1,7 @@
+@font-face{
+    font-family: "7segment";
+    src: url("7segments.ttf") format("truetype");
+}
 #calc-body{
     width: 500px;
     height: 800px;
@@ -7,9 +11,15 @@
 
 }
 
-#number-row{
+#display{
+    display: flex;
     flex-grow: 6;
+    font-family: "7segment";
+    justify-items: end;
+    align-items: center;
+    font-size: 80px;
 }
+
 body{
     background-color: white;
 }
@@ -23,8 +33,7 @@ body{
     
 }
 
-.button {
-    background-color: grey;
+.operator, .num, .clear {
     margin: 2px;
     flex: auto;
     width: 50%;
@@ -33,6 +42,14 @@ body{
     font-size: 30px;
 }
 
-.button.operator{
-    background-color: palevioletred;
+.operator{
+    background-color: orange;
+}
+
+.num{
+    background-color: grey;
+}
+
+.clear{
+    background-color: red;
 }
