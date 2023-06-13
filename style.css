@@ -6,16 +6,16 @@
     width: 500px;
     height: 800px;
     display: flex;
-    background-color: beige;
+    background-color: rgb(30, 30, 30);
     flex-direction: column;
 
 }
 
 #display{
     display: flex;
-    flex-grow: 6;
+    flex-grow: 4;
     font-family: "7segment";
-    justify-items: end;
+    justify-items: center;
     align-items: center;
     font-size: 80px;
 }
@@ -28,28 +28,26 @@ body{
     display: flex;
     flex: auto;
     flex-grow: 1;
-    background-color: aqua;
-    margin: 3px;
-    
+    background-color: rgb(200, 200, 200);
 }
 
 .operator, .num, .clear {
     margin: 2px;
+    display: flex;
     flex: auto;
     width: 50%;
-    padding-bottom: 50%;
-    padding: 20px;
+    padding: 30px;
     font-size: 30px;
 }
 
 .operator{
-    background-color: orange;
+    background-color: rgb(150, 150, 150);
 }
 
 .num{
-    background-color: grey;
+    background-color: rgb(175, 175, 175);
 }
 
 .clear{
-    background-color: red;
+    background-color: rgb(150, 150, 150);
 }

@@ -16,21 +16,61 @@ function divider(a, b){
 
 //selects which operation function to call
 function operate(){
-    console.log("operating", values)
-    if(values.plus){
-        values.plus = false
+   switch(values.operator) {
+    case "plus":
+        values.operator = false
         values.saved = adder(values.saved, parseFloat(values.current))
-    } else if(values.minus) {
-        values.minus = false
+    case "minus":
+        values.operator = false
         values.saved = subtractor(values.saved, parseFloat(values.current))
-    } else if(values.multiply){
-        values.multiply = false
-        values.saved = multiplier(values.saved, parseFloat(values.current))
-    } else if(values.divide) {
-        values.divide = false
+        break
+    case "divide":
+        values.operator = false
         values.saved = divider(values.saved, parseFloat(values.current))
+        break
+    case "multiply":
+        values.operator = false
+        values.saved = multiplier(values.saved, parseFloat(values.current))
+        break
+   }
+   values.current = ""
+}
+
+//only selected operator is highlighted, reset if passed nothing or other value
+function highlightOperator(target){
+    switch(target){
+    case "plus":
+        divideButton.style.color = 'black'
+        multiplyButton.style.color = 'black'
+        minusButton.style.color = 'black'
+        plusButton.style.color = 'red'
+        break
+    case "minus":
+        divideButton.style.color = 'black'
+        multiplyButton.style.color = 'black'
+        minusButton.style.color = 'red'
+        plusButton.style.color = 'black'
+        break
+    case "divide":
+        divideButton.style.color = 'red'
+        multiplyButton.style.color = 'black'
+        minusButton.style.color = 'black'
+        plusButton.style.color = 'black'
+        break
+    case "multiply":
+        divideButton.style.color = 'black'
+        multiplyButton.style.color = 'red'
+        minusButton.style.color = 'black'
+        plusButton.style.color = 'black'
+        break
+    default:
+        divideButton.style.color = 'black'
+        multiplyButton.style.color = 'black'
+        minusButton.style.color = 'black'
+        plusButton.style.color = 'black'
+        break
     }
-    values.current = ""
+    return
 }
 
 
@@ -62,12 +102,8 @@ let buttons = [cButton, ceButton, oneButton, twoButton, threeButton, fourButton,
 
 let values = {
     current: "",
-    saved: false,
-    plus: false,
-    minus: false,
-    multiply: false,
-    divide: false,
-    
+    operator: false,
+    saved: false,   
 }
 
 //make starting display show 0
@@ -77,16 +113,26 @@ display.textContent = "0"
 buttons.forEach(button => {
     button.dataset.backgroundColor = window.getComputedStyle(button)['backgroundColor']
     button.addEventListener("mouseover", function(){
-        button.style.backgroundColor = "black"
-    })
-    button.addEventListener('mouseout', function(){
-        button.style.backgroundColor = button.dataset.backgroundColor
+        button.style.backgroundColor = 'rgb(100, 100, 100)'
     })
 
+    button.addEventListener('mouseout', function(){
+        button.style.backgroundColor = button.dataset.backgroundColor
+        button.style.justifyContent = 'start'
+        button.style.alignItems = 'start'
+    })
+    
+    button.addEventListener('mousedown', function(){
+        button.style.justifyContent = 'center'
+        button.style.alignItems = 'center'
+    })
+    button.addEventListener('mouseup', function(){
+        button.style.justifyContent = 'start'
+        button.style.alignItems = 'start'
+    })
     button.addEventListener('click', function(){
         if(button.classList.contains("num")){
             //concats clicked num to current stopping after max length
-            console.log(values.current.length)
             if (values.current.length < 8){
                 values.current = values.current + button.textContent
                 display.textContent = values.current
@@ -94,48 +140,42 @@ buttons.forEach(button => {
         }else if(button.classList.contains("clear")){
             values.current = ""
             display.textContent = "0"
+            highlightOperator()
             if(button.id == "c"){
                 values = {
                     current: "",
                     saved: false,
-                    plus: false,
-                    minus: false,
-                    multiply: false,
-                    divide: false,
-                    
+                    operator: false,
                 }
             }
-            console.log("cleared", values)
         }else if(button.classList.contains("operator")){
             if((values.saved === false) && (button.id != "equals")){
                 //operator clicked before number is saved
-                //save value and make clicked operator true with all others false
+                //save value and save operator
                 values.current == "" ? values.current = "0" : undefined;
                 values.saved = parseFloat(values.current)
                 values.current = ""
-                values.divide = false
-                values.minus = false
-                values.multiply = false
-                values.plus = false
-                values[button.id] = true
+                values.operator = button.id
                 display.textContent = "0"
+                highlightOperator(button.id)
             } else if (values.current == ""){
                 //operator is clicked with saved value but no current value
                 //only reset operator selected
-                values.divide = false
-                values.minus = false
-                values.multiply = false
-                values.plus = false
-                values[button.id] = true
+                values.operator = button.id
             }else {
                 //operator is clicked with saved value and current value
                 operate()
+                
                 display.textContent = values.saved
                 if(button.id != "equals"){
-                    values[button.id] = true
+                    values.operator = button.id
+                    highlightOperator(button.id)
+                } else {
+                    highlightOperator()
                 }
             }
-            console.log("operator", values)
+            
+
         }
 
     })
