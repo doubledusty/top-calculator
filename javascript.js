@@ -20,6 +20,7 @@ function operate(){
     case "plus":
         values.operator = false
         values.saved = adder(values.saved, parseFloat(values.current))
+        break
     case "minus":
         values.operator = false
         values.saved = subtractor(values.saved, parseFloat(values.current))
