@@ -15,13 +15,15 @@
     display: flex;
     flex-grow: 4;
     font-family: "7segment";
-    justify-items: center;
+    justify-content: flex-end;
+    padding-right: 20px;
     align-items: center;
     font-size: 80px;
 }
 
 body{
     background-color: white;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .row{
@@ -37,7 +39,7 @@ body{
     flex: auto;
     width: 50%;
     padding: 30px;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .operator{
