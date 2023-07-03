@@ -133,11 +133,19 @@ buttons.forEach(button => {
     })
     button.addEventListener('click', function(){
         if(button.classList.contains("num")){
-            //concats clicked num to current stopping after max length
-            if (values.current.length < 8){
-                values.current = values.current + button.textContent
-                display.textContent = values.current
+            //concats clicked num to current stopping after max length including decimal logic
+            if(values.current.includes(".")){
+                if (values.current.length < 10 && button.id != "point"){
+                    values.current = values.current + button.textContent
+                    display.textContent = values.current
+                }
+            } else{
+                if (values.current.length < 8){
+                    values.current = values.current + button.textContent
+                    display.textContent = values.current
+                }
             }
+            
         }else if(button.classList.contains("clear")){
             values.current = ""
             display.textContent = "0"
@@ -166,8 +174,11 @@ buttons.forEach(button => {
             }else {
                 //operator is clicked with saved value and current value
                 operate()
-                
-                display.textContent = values.saved
+                if(values.saved == Infinity){
+                    display.textContent = "INF"
+                } else {
+                    display.textContent = values.saved
+                }
                 if(button.id != "equals"){
                     values.operator = button.id
                     highlightOperator(button.id)

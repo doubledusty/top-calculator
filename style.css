@@ -13,7 +13,7 @@
 
 #display{
     display: flex;
-    flex-grow: 4;
+    flex-grow: 6;
     font-family: "7segment";
     justify-content: flex-end;
     padding-right: 20px;
