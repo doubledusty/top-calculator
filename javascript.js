@@ -171,6 +171,7 @@ buttons.forEach(button => {
                 //operator is clicked with saved value but no current value
                 //only reset operator selected
                 values.operator = button.id
+                highlightOperator(button.id)
             }else {
                 //operator is clicked with saved value and current value
                 operate()
